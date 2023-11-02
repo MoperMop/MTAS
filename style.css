@@ -6,7 +6,6 @@ body {
   > * { padding: 8px; }
 }
 
-
 header {
   background-color: whitesmoke;
   border-block-end: solid;
@@ -14,8 +13,22 @@ header {
   text-align: center;
 
 
+  position: sticky;
+  inset-block-start: 0;
+
+
   > img {
-    max-width: 340px;
-    max-height: 150px;
+    inline-size: 340px;
+    max-inline-size: 100%;
+    block-size: 150px;
+    max-block-size: 150px;
+
+    object-fit: contain;
+    display: inline-block;
   }
+}
+
+main {
+  max-inline-size: 700px;
+  margin: auto;
 }
