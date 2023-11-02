@@ -1,9 +1,21 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 
+body {
+  margin: 0;
+  > * { padding: 8px; }
+}
+
+
 header {
+  background-color: whitesmoke;
+  border-block-end: solid;
+
+  text-align: center;
+
+
   > img {
-    max-width: 457px;
-    max-height: 200px;
+    max-width: 340px;
+    max-height: 150px;
   }
 }
