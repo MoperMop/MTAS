@@ -1,1 +1,9 @@
 *, *::before, *::after { box-sizing: border-box; }
+
+
+header {
+  > img {
+    max-width: 457px;
+    max-height: 200px;
+  }
+}
