@@ -19,7 +19,13 @@ export default class Sticker extends HTMLElement {
 
     /** @type {HTMLAnchorElement} */ (shadow.querySelector("a")).href = this.getAttribute("src") ?? "";
 
-    /** @type {HTMLButtonElement} */ (shadow.querySelector("button")).addEventListener("click", () => {Sticker.print(this);});
+    /** @type {HTMLButtonElement} */ (shadow.querySelector("button")).addEventListener("click", () => {
+      if (this.hasAttribute("selected")) this.removeAttribute("selected");
+      else this.setAttribute("selected", "");
+
+
+      Sticker.printPopup.hidden = !Boolean(document.querySelector(`${Sticker.tagName}[selected]`))
+    });
   }
 
 
@@ -28,22 +34,36 @@ export default class Sticker extends HTMLElement {
    * @param {...Sticker} stickers 
    */
   static print(...stickers) {
-    const iframe = document.createElement("iframe");
-    iframe.hidden = true;
-    document.body.appendChild(iframe);
+    const iframe = /** @type {HTMLIFrameElement & {contentDocument: Document}} */ (document.querySelector("#print-page"));
 
-    for (const sticker of stickers) {
-      iframe.contentDocument?.body.appendChild(sticker.#image.cloneNode());
-    }
+    iframe.contentDocument.body.append(...stickers.map(sticker => sticker.#image.cloneNode()));
 
     iframe.contentWindow?.print();
-    iframe.remove();
-
-    // prevent weird bug
-    for (const sticker of stickers) sticker.#image.src += "";
+    iframe.contentDocument.body.innerHTML = "";
   }
+  static printPopup = /** @type {HTMLElement} */ (document.querySelector("#print"));
+  static printButton = /** @type {HTMLButtonElement} */ (this.printPopup.querySelector("button"));
+  static printStylesheet = document.createElement("link");
 
 
   static tagName = "sticker-";
-  static { customElements.define(this.tagName, this); }
+  static {
+    customElements.define(this.tagName, this);
+
+
+    this.printButton.addEventListener("click", () => {
+      const selected = /** @type {Sticker[]} */ ([...document.querySelectorAll(`${this.tagName}[selected]`)])
+      this.print(...selected);
+
+
+      selected.forEach(sticker => sticker.removeAttribute("selected"));
+
+
+      this.printPopup.hidden = true;
+    });
+
+
+    this.printStylesheet.href = "print.css";
+    this.printStylesheet.rel = "stylesheet";
+  }
 }

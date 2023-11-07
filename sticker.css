@@ -5,6 +5,9 @@
   border: 2px solid;
   background-color: hsl(120, 100%, 40%);
 }
+:host([selected]) {
+  background-color: blue;
+}
 
 
 a {

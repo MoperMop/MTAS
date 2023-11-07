@@ -30,3 +30,25 @@ main {
   max-inline-size: 700px;
   margin: auto;
 }
+
+
+#print {
+  position: fixed;
+  inset-block-end: 0;
+
+
+  inline-size: 100%;
+
+  &:not([hidden]) { display: flex; }
+  justify-content: center;
+
+
+  background-color: whitesmoke;
+  border-block-start: solid;
+
+
+  > button {
+    font-size: 2rem;
+    border-width: 5px;
+  }
+}
