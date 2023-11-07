@@ -1,1 +1,27 @@
-:host { display: inline-block; }
+:host {
+  display: inline-block;
+
+  padding: 5px;
+  border: 2px solid;
+  background-color: hsl(120, 100%, 40%);
+}
+
+
+a {
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 3px;
+  background-color: #eee;
+}
+
+
+div {
+  margin: 3px;
+
+
+  display: flex;
+  gap: 5px;
+
+
+  text-align: center;
+}
