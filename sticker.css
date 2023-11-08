@@ -4,9 +4,18 @@
   padding: 5px;
   border: 2px solid;
   background-color: hsl(120, 100%, 40%);
+
+
+  max-inline-size: 100%;
 }
 :host([selected]) {
   background-color: blue;
+}
+
+
+img {
+  max-inline-size: 100%;
+  object-fit: contain;
 }
 
 
@@ -24,6 +33,7 @@ div {
 
   display: flex;
   gap: 5px;
+  flex-wrap: wrap;
 
 
   text-align: center;

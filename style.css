@@ -17,7 +17,7 @@ header {
 
 
   > img {
-    min-inline-size: 400px;
+    inline-size: 400px;
     max-inline-size: 100%;
     max-block-size: 100%;
 
