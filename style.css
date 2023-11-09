@@ -75,7 +75,7 @@ article footer {
   border-radius: 10px;
   padding: 5px;
 
-  background-color: lightgray;
+  background-color: #8fc78f;
 
 
   > :first-child { margin-block-start: 0; }
