@@ -19,7 +19,7 @@ img {
 }
 
 
-a {
+a, label {
   border: 1px solid black;
   border-radius: 6px;
   padding: 3px;
@@ -32,6 +32,7 @@ div {
 
 
   display: flex;
+  align-items: center;
   gap: 5px;
   flex-wrap: wrap;
 

@@ -19,7 +19,7 @@ export default class Sticker extends HTMLElement {
 
     /** @type {HTMLAnchorElement} */ (shadow.querySelector("a")).href = this.getAttribute("src") ?? "";
 
-    /** @type {HTMLButtonElement} */ (shadow.querySelector("button")).addEventListener("click", () => {
+    /** @type {HTMLInputElement} */ (shadow.querySelector("#print")).addEventListener("input", () => {
       if (this.hasAttribute("selected")) this.removeAttribute("selected");
       else this.setAttribute("selected", "");
 
