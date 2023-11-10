@@ -3,6 +3,7 @@ export default class Sticker extends HTMLElement {
   static content = /** @type {HTMLTemplateElement} */ (document.querySelector("#sticker")).content;
 
   #image;
+  #print;
 
   constructor() {
     super();
@@ -19,13 +20,22 @@ export default class Sticker extends HTMLElement {
 
     /** @type {HTMLAnchorElement} */ (shadow.querySelector("a")).href = this.getAttribute("src") ?? "";
 
-    /** @type {HTMLInputElement} */ (shadow.querySelector("#print")).addEventListener("input", () => {
-      if (this.hasAttribute("selected")) this.removeAttribute("selected");
-      else this.setAttribute("selected", "");
-
-
-      Sticker.printPopup.hidden = !Boolean(document.querySelector(`${Sticker.tagName}[selected]`))
+    this.#print = /** @type {HTMLInputElement} */ (shadow.querySelector("#print"));
+    this.#print.addEventListener("input", () => {
+      this.selected = this.#print.checked;
     });
+  }
+
+
+  get selected() { return this.hasAttribute("selected"); }
+  set selected(value) {
+    if (value) this.setAttribute("selected", "");
+    else this.removeAttribute("selected");
+
+    this.#print.checked = value;
+
+
+    Sticker.printPopup.hidden = !Boolean(document.querySelector(`${Sticker.tagName}[selected]`))
   }
 
 
@@ -56,10 +66,7 @@ export default class Sticker extends HTMLElement {
       this.print(...selected);
 
 
-      selected.forEach(sticker => sticker.removeAttribute("selected"));
-
-
-      this.printPopup.hidden = true;
+      selected.forEach(sticker => sticker.selected = !sticker.selected);
     });
 
 
